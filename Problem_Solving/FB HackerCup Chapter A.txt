@@ -1,0 +1,76 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+#define fi(i, n) for (lli i = 1; i < n; i++)
+#define forint(i, n) for (lli i = 0; i < n; i++)
+#define lli long long int
+const lli MOD = 1e9 + 7;
+int mainarr[100000050];
+int P[100000050];
+int main()
+{
+    lli cases = 0;
+    
+    int counter = 0;
+    cin >> cases;
+    // cases=1;
+    while (cases--)
+    {
+        counter++;
+        int n = 0, k = 0, w = 0;
+        cin >> n >> k >> w;
+        int L[n]={0};
+        int H[n]={0};
+        forint(i, k) cin >> L[i];
+        lli A1 = 0, B1 = 0, C1 = 0, D1 = 0, A2 = 0, B2 = 0, C2 = 0, D2 = 0;
+        cin >> A1 >> B1 >> C1 >> D1;
+
+        forint(i, k) cin >> H[i];
+
+        cin >> A2 >> B2 >> C2 >> D2;
+
+        int remainingvals = n - k;
+        int startX = L[0];
+        forint(i, remainingvals)
+        {
+            L[k + i] = ((A1 * L[k + i - 2]) % D1 + (B1 * L[k + i - 1]) % D1 + C1 + D1) % D1 + 1;
+            H[k + i] = ((A2 * H[k + i - 2]) % D2 + (B2 * H[k + i - 1]) % D2 + C2 + D2) % D2 + 1;
+        }
+
+        for(int i=0;i<=(L[n-1]+w+10);i++)    //just a bit extra won't hurt
+            mainarr[i]=0;
+
+        int ht = H[0];
+        P[0] = (2 * (H[0] + w)) % MOD;
+        for(int i=0;i<=w;i++)
+            mainarr[L[0]+i]=ht;
+
+        fi(i,n)
+        {
+            ht=H[i];
+            int tempw=1;
+            int diff=0;
+            int decrease=0;
+            int baseadd=0;
+            decrease=min(mainarr[L[i]],ht);
+            decrease=(2*decrease)%MOD;
+            while(tempw<=w)
+            {
+                if(mainarr[L[i]+tempw]==0)
+                    baseadd++;
+                mainarr[L[i]+tempw]=max(mainarr[L[i]+tempw],ht);
+                tempw++;
+            }
+            int moreval=0;
+            P[i]=(2*ht+baseadd*2+P[i-1]-decrease+MOD)%MOD;
+        }
+        lli val = 1;
+        forint(i, n)
+        {
+            val = ((val * P[i] % MOD) % MOD);
+            val = val % MOD;
+        }
+        cout <<"Case #"<<counter<<": "<< val << "\n";
+    }
+    return 0;
+}
