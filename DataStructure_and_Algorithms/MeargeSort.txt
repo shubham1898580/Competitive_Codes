@@ -1,4 +1,6 @@
- void merge(int arr[], int l, int m, int r) 
+ 
+ // sort and merge the array from l to r.
+void merge(int arr[], int l, int m, int r) 
     { 
         // Find sizes of two subarrays to be merged 
         int n1 = m - l + 1; 
@@ -53,13 +55,17 @@
     void sort(int arr[], int l, int r) 
     { 
         if (l < r) { 
+
+            // devide part
             // Find the middle point 
             int m = (l + r) / 2; 
   
-            // Sort first and second halves 
+            // Sort first and second halves , devide array l to m and m+1 to r.
             sort(arr, l, m); 
             sort(arr, m + 1, r); 
-  
+            
+
+             // concoure part
             // Merge the sorted halves 
             merge(arr, l, m, r); 
         } 

@@ -1,0 +1,25 @@
+(a + b) = (a + b)%mod
+
+(a - b) = (a - b + mod)%mod
+
+(a * b) = (a * b)%mod
+
+(a / b) = (a%mod * b^(mod - 2)%mod)%mod
+
+
+// power fun to calculate power in log(n)
+
+public static int power(int n , int p ,int mod){
+
+int ans = 1;
+while(p!=0){
+if(p%2 == 0){
+p = p/2;
+n = (n*n)%mod;
+}else{
+p = p-1;
+ans = (ans*n)%mod;
+}
+}
+return ans;
+}

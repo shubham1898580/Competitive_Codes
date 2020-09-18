@@ -2,3 +2,14 @@ cordinate system to move in all direction in matrix
 
 int dx[]={-1,-1,-1,0,1,1,1,0};
 int dy[]={-1,0,1,1,1,0,-1,-1};
+
+
+// Creating an empty Stack 
+        Stack<String> stack = new Stack<String>(); 
+
+
+
+
+// Creating empty priority queue 
+        PriorityQueue<Integer> pQueue = new PriorityQueue<Integer>(); 
+  
